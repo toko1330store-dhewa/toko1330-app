@@ -20,33 +20,23 @@
     <!-- Container Utama -->
     <div class="max-w-md mx-auto bg-[#0b3b36] min-h-screen relative shadow-2xl">
 
-        <!-- HEADER (Minimalis seperti MOYA) -->
-        <header class="px-6 pt-10 pb-4 sticky top-0 z-50 bg-[#0b3b36]">
-            <div class="flex justify-between items-center mb-6">
-                <div class="flex items-center gap-3">
-                    <!-- Logo -->
-                    <img src="{{ asset('images/1330-logo.png') }}" alt="Logo Toko" class="h-10 w-auto object-contain drop-shadow-md">
-                    <div>
-                        <h1 class="text-xl font-bold tracking-widest text-[#f4f1ea] uppercase">Toko 1330</h1>
-                    </div>
-                </div>
-                <!-- Lonceng Notifikasi -->
-                <a href="{{ route('notifications') }}" class="p-2 text-[#a8c3b8] hover:text-[#f4f1ea] transition">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
-                </a>
-            </div>
+        <!-- HEADER (Logo Tengah, Tulisan di Bawah, Lonceng di Kanan) -->
+        <header class="px-6 pt-10 pb-6 sticky top-0 z-50 bg-[#0b3b36] relative flex justify-center items-center">
             
-            <!-- Search Bar Minimalis -->
-            <div class="relative">
-                <span class="absolute inset-y-0 left-0 flex items-center pl-0 text-[#a8c3b8]">
-                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                </span>
-                <input type="text" placeholder="What brings you joy today?" class="w-full pl-7 pr-4 py-2 bg-transparent border-b border-[#2d5c56] text-sm text-[#f4f1ea] placeholder-[#a8c3b8] focus:outline-none focus:border-[#e0c097] transition-all italic">
+            <!-- Konten Tengah: Logo & Tulisan -->
+            <div class="flex flex-col items-center justify-center">
+                <img src="{{ asset('images/1330-logo.png') }}" alt="Logo Toko" class="h-12 w-auto object-contain drop-shadow-md mb-2">
+                <h1 class="text-xl font-bold tracking-widest text-[#f4f1ea] uppercase">Toko 1330</h1>
             </div>
+
+            <!-- Lonceng Notifikasi (Posisi Absolut di Kanan) -->
+            <a href="{{ route('notifications') }}" class="absolute right-6 top-12 p-2 text-[#a8c3b8] hover:text-[#f4f1ea] transition">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
+            </a>
         </header>
 
         <!-- KONTEN -->
-        <main class="px-6 py-4 space-y-8">
+        <main class="px-6 py-2 space-y-8">
             
             <!-- Banner Promo (Gaya Kotak Foto MOYA) -->
             <div class="bg-[#e0c097] rounded-2xl p-5 text-[#0b3b36] relative overflow-hidden shadow-sm flex items-center justify-between">
