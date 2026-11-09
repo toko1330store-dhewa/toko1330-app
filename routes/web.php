@@ -80,7 +80,10 @@ Route::middleware('auth:admin')->prefix('admin')->name('admin.')->group(function
     // Logout Admin
     Route::post('/logout', [LoginController::class, 'destroy'])->name('logout');
 
-    // Produk Admin (LENGKAP)
+    // API Filter Kategori
+    Route::get('/api/categories/{brand_id}', [ProductController::class, 'getCategoriesByBrand'])->name('api.categories');
+
+    // Produk Admin
     Route::get('/products', [ProductController::class, 'index'])->name('products.index');
     Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
     Route::post('/products', [ProductController::class, 'store'])->name('products.store');

@@ -25,7 +25,7 @@
                 
                 <div>
                     <label class="block text-xs text-[#a8c3b8] mb-1">Pilih Brand</label>
-                    <select name="brand_id" class="w-full bg-[#1a4f48] border border-[#2d5c56] rounded-lg px-4 py-3 text-sm text-[#f4f1ea] focus:outline-none focus:border-[#e0c097]" required>
+                    <select id="brand_id" name="brand_id" class="w-full bg-[#1a4f48] border border-[#2d5c56] rounded-lg px-4 py-3 text-sm text-[#f4f1ea] focus:outline-none focus:border-[#e0c097]" required>
                         <option value="">-- Pilih Brand --</option>
                         @foreach($brands as $brand)
                             <option value="{{ $brand->id }}">{{ $brand->name }}</option>
@@ -35,11 +35,8 @@
 
                 <div>
                     <label class="block text-xs text-[#a8c3b8] mb-1">Pilih Kategori</label>
-                    <select name="category_id" class="w-full bg-[#1a4f48] border border-[#2d5c56] rounded-lg px-4 py-3 text-sm text-[#f4f1ea] focus:outline-none focus:border-[#e0c097]" required>
-                        <option value="">-- Pilih Kategori --</option>
-                        @foreach($categories as $category)
-                            <option value="{{ $category->id }}">{{ $category->name }}</option>
-                        @endforeach
+                    <select id="category_id" name="category_id" class="w-full bg-[#1a4f48] border border-[#2d5c56] rounded-lg px-4 py-3 text-sm text-[#f4f1ea] focus:outline-none focus:border-[#e0c097]" required disabled>
+                        <option value="">-- Pilih Brand Terlebih Dahulu --</option>
                     </select>
                 </div>
 
@@ -79,5 +76,35 @@
             </form>
         </main>
     </div>
+
+    <!-- Script Filter Kategori Otomatis -->
+    <script>
+        document.getElementById('brand_id').addEventListener('change', function() {
+            var brandId = this.value;
+            var categorySelect = document.getElementById('category_id');
+            
+            // Reset kategori
+            categorySelect.innerHTML = '<option value="">Memuat kategori...</option>';
+            categorySelect.disabled = true;
+
+            if (brandId) {
+                // Ambil data kategori berdasarkan brand_id via API
+                fetch(`/admin/api/categories/${brandId}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        categorySelect.innerHTML = '<option value="">-- Pilih Kategori --</option>';
+                        data.forEach(category => {
+                            categorySelect.innerHTML += `<option value="${category.id}">${category.name}</option>`;
+                        });
+                        categorySelect.disabled = false;
+                    })
+                    .catch(error => {
+                        categorySelect.innerHTML = '<option value="">Gagal memuat kategori</option>';
+                    });
+            } else {
+                categorySelect.innerHTML = '<option value="">-- Pilih Brand Terlebih Dahulu --</option>';
+            }
+        });
+    </script>
 </body>
 </html>
