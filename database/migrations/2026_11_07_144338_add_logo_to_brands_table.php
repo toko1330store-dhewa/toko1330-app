@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('brands', function (Blueprint $table) {
             // Menambahkan kolom logo setelah kolom slug
-            $table->string('logo')->nullable()->after('slug');
+           // $table->string('logo')->nullable()->after('slug');
         });
     }
 
