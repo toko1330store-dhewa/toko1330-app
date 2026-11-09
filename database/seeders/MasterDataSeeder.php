@@ -10,13 +10,21 @@ class MasterDataSeeder extends Seeder
 {
     public function run(): void
     {
-        // Buat Brand
-        Brand::updateOrCreate(['slug' => 'sitra'], ['name' => 'SITRA']);
-        Brand::updateOrCreate(['slug' => 'shafahat'], ['name' => 'SHAFAHAT']);
-        Brand::updateOrCreate(['slug' => 'kei'], ['name' => 'KEI']);
+        // 1. Buat Brand dulu
+        $sitra = Brand::updateOrCreate(['slug' => 'sitra'], ['name' => 'SITRA']);
+        $shafahat = Brand::updateOrCreate(['slug' => 'shafahat'], ['name' => 'SHAFAHAT']);
+        $kei = Brand::updateOrCreate(['slug' => 'kei'], ['name' => 'KEI']);
 
-        // Buat Kategori
-        Category::updateOrCreate(['slug' => 'buku'], ['name' => 'Buku']);
-        Category::updateOrCreate(['slug' => 'aksesoris'], ['name' => 'Aksesoris']);
+        // 2. Buat Kategori dengan menyertakan brand_id
+        // (Kita asumsikan kategori buku milik SHAFAHAT, dan aksesoris milik SITRA/KEI)
+        Category::updateOrCreate(
+            ['slug' => 'buku'], 
+            ['name' => 'Buku', 'brand_id' => $shafahat->id]
+        );
+        
+        Category::updateOrCreate(
+            ['slug' => 'aksesoris'], 
+            ['name' => 'Aksesoris', 'brand_id' => $sitra->id]
+        );
     }
 }
